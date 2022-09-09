@@ -1,6 +1,7 @@
 import { ObjectSchema } from 'joi';
 import loginSchema from './loginSchema.js';
 import registerSchema from './registerSchema.js'
+import credentialSchema from './credentialSchema.js'
 
 interface AllSchemas {
     [key: string]: ObjectSchema
@@ -8,7 +9,8 @@ interface AllSchemas {
 
 const allSchema: AllSchemas = {
     'register': registerSchema,
-    'login': loginSchema
+    'login': loginSchema,
+    'credential': credentialSchema,
 }
 
 export default allSchema;

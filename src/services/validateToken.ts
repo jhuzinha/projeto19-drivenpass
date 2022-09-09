@@ -8,11 +8,18 @@ interface TokenPayload {
 }
 
 export async function validateToken(userToken: string) {
-    const data = jwt.verify(userToken, process.env.SECRET_TOKEN);
-    const { id } = data as TokenPayload
-    const user = await userFunctions.findById(id)
-    if (!user) {
-        throw { type: "Unauthorized", message: "Unauthorized" }
+    if (!userToken) {
+        throw { type: "Unauthorized", message: "Token Invalid" }
     }
-    return user
+    try {
+        const data = jwt.verify(userToken, process.env.SECRET_TOKEN);
+        const { id } = data as TokenPayload
+        const user = await userFunctions.findById(id)
+        if (!user) {
+            throw { type: "Unauthorized", message: "Unauthorized" }
+        }
+        return user
+    } catch (err) {
+        throw { type: "Unauthorized", message: "Token Invalid" }
+    }
 }

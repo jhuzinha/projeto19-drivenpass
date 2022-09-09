@@ -8,12 +8,8 @@ export async function createUser(user: IUsersType) {
     if (existUser) {
         throw { type: "Conflict", message: "Email alredy used" }
     }
-    const password = bcrypt.hashSync(user.password, 8)
-    const data: IUsersType = {
-        email: user.email,
-        password
-    }
-    await userFunctions.insert(data)
+    user.password = bcrypt.hashSync(user.password, 8)
+    await userFunctions.insert(user)
     return
 }
 
@@ -26,6 +22,5 @@ export async function loginUser(user: IUsersType) {
         throw { type: "Unauthorized", message: "Password or Email wrong" }
     }
     const token = jwt.sign({ id: existUser.id }, process.env.SECRET_TOKEN, { expiresIn: '1d' })
-    console.log(jwt.verify(token, process.env.SECRET_TOKEN))
     return token
 }
