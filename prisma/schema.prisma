@@ -9,3 +9,76 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model Users {
+  id          Int           @id @default(autoincrement())
+  email       String        @unique
+  password    String
+  credentials Credentials[]
+  notes       Notes[]
+  cards       Cards[]
+  wifi        Wifi[]
+
+  @@map("users")
+}
+
+model Credentials {
+  id       Int    @id @default(autoincrement())
+  title    String
+  userName String
+  url      String
+  password String
+
+  Users   Users? @relation(fields: [usersId], references: [id])
+  usersId Int?
+
+  @@unique([title, usersId])
+  @@map("credentials")
+}
+
+model Notes {
+  id      Int    @id @default(autoincrement())
+  title   String
+  note    String
+  Users   Users? @relation(fields: [usersId], references: [id])
+  usersId Int?
+
+  @@unique([title, usersId])
+  @@map("notes")
+}
+
+enum Type {
+  credit
+  debit
+  both
+}
+
+model Cards {
+  id             Int     @id @default(autoincrement())
+  title          String  @unique
+  number         Int
+  nameCard       String
+  codeSecurity   Int
+  expirationDate String
+  password       String
+  isVirtual      Boolean
+  type           Type
+
+  Users   Users? @relation(fields: [usersId], references: [id])
+  usersId Int?
+
+  @@unique([title, usersId])
+  @@map("cards")
+}
+
+model Wifi {
+  id       Int    @id @default(autoincrement())
+  title    String
+  name     String
+  password String
+
+  Users   Users? @relation(fields: [usersId], references: [id])
+  usersId Int?
+
+  @@map("wifi")
+}
