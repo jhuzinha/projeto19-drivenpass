@@ -11,15 +11,11 @@ export async function validateToken(userToken: string) {
     if (!userToken) {
         throw { type: "Unauthorized", message: "Token Invalid" }
     }
-    try {
-        const data = jwt.verify(userToken, process.env.SECRET_TOKEN);
-        const { id } = data as TokenPayload
-        const user = await userFunctions.findById(id)
-        if (!user) {
-            throw { type: "Unauthorized", message: "Unauthorized" }
-        }
-        return user
-    } catch (err) {
-        throw { type: "Unauthorized", message: "Token Invalid" }
+    const data = jwt.verify(userToken, process.env.SECRET_TOKEN);
+    const { id } = data as TokenPayload
+    const user = await userFunctions.findById(id)
+    if (!user) {
+        throw { type: "Unauthorized", message: "Unauthorized" }
     }
+    return user
 }
