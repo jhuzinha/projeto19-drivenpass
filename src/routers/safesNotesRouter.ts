@@ -1,10 +1,12 @@
 import { Router } from "express";
+import * as safeNotesFunctions from '../controllers/safeNotesController.js'
+import Validate from "../middlewares/joiValidate.js";
 
 const safenoteRouter = Router();
 
-safenoteRouter.post('/safenote/create')
-safenoteRouter.get('/safenote/:id')
-safenoteRouter.delete('/safenote/:id/delete')
+safenoteRouter.post('/safenote/create', Validate('safeNote'), safeNotesFunctions.createNotes)
+safenoteRouter.get('/safenote', safeNotesFunctions.getNotes)
+safenoteRouter.delete('/safenote/:id/delete', safeNotesFunctions.deleteNotes)
 
 
 export default safenoteRouter;
