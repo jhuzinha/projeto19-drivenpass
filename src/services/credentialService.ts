@@ -1,4 +1,4 @@
-import { ICredentialsType } from "../types/credentialType.js";
+import { ICredentialsType, ICredentialMap } from "../types/credentialType.js";
 import * as credentialFunctions from '../repositories/credentialRepository.js';
 import { cryptPassword, descryptPassword } from "../utils/cryptPassword.js";
 
@@ -23,7 +23,7 @@ export async function get(id: number, userId: number) {
         return credentials
     }
     const credentials = await credentialFunctions.findMany(userId)
-    const descrypCredential = credentials.map((item) => { return { "title": item.title, "id": item.id, "url": item.url } })
+    const descrypCredential = credentials.map((item: ICredentialMap) => { return { "title": item.title, "id": item.id, "url": item.url } })
     return descrypCredential
 }
 

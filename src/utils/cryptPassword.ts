@@ -1,5 +1,5 @@
 import Cryptr from 'cryptr';
-const cryptr = new Cryptr(process.env.CRYPT_SECRET)
+const cryptr = new Cryptr(process.env.CRYPT_SECRET!)
 
 export function cryptPassword(password: string) {
     const newPassword = cryptr.encrypt(password)

@@ -1,10 +1,12 @@
 import { Router } from "express";
+import * as wifiFunctions from '../controllers/wifiController.js';
+import Validate from "../middlewares/joiValidate.js";
 
 const wifiRouter = Router();
 
-wifiRouter.post('/wifi/create')
-wifiRouter.get('/wifi/:id')
-wifiRouter.delete('/wifi/:id/delete')
+wifiRouter.post('/wifi/create', Validate('wifi'), wifiFunctions.createWifi)
+wifiRouter.get('/wifi', wifiFunctions.getWifi)
+wifiRouter.delete('/wifi/:id/delete', wifiFunctions.deleteWifi)
 
 
 export default wifiRouter;

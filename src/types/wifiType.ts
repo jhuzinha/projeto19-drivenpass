@@ -1,3 +1,3 @@
 import { Wifi } from "@prisma/client";
 
-export type IWifiType = Omit<Wifi, 'id'>
+export type IWifiType = Omit<Wifi, 'id' | 'usersId'>

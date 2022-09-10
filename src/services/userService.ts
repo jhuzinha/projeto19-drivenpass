@@ -2,6 +2,9 @@ import jwt from 'jsonwebtoken';
 import * as userFunctions from '../repositories/userRepository.js';
 import { IUsersType } from '../types/userType.js';
 import bcrypt from 'bcrypt';
+import dotenv from 'dotenv';
+
+dotenv.config()
 
 export async function createUser(user: IUsersType) {
     const existUser = await userFunctions.findOne(user.email)
@@ -21,6 +24,6 @@ export async function loginUser(user: IUsersType) {
     if (!bcrypt.compare(user.password, existUser.password)) {
         throw { type: "Unauthorized", message: "Password or Email wrong" }
     }
-    const token = jwt.sign({ id: existUser.id }, process.env.SECRET_TOKEN, { expiresIn: '1d' })
+    const token = jwt.sign({ id: existUser.id }, process.env.SECRET_TOKEN!, { expiresIn: '1d' })
     return token
 }

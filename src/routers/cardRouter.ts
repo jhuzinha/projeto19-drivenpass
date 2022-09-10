@@ -1,10 +1,12 @@
 import { Router } from "express";
+import * as cardFunctions from '../controllers/cardController.js'
+import Validate from "../middlewares/joiValidate.js";
 
 const cardRouter = Router();
 
-cardRouter.post('/card/create')
-cardRouter.get('/cards/:id')
-cardRouter.delete('/card/:id/delete')
+cardRouter.post('/card/create', Validate('card'), cardFunctions.createCard)
+cardRouter.get('/card', cardFunctions.getCard)
+cardRouter.delete('/card/:id/delete', cardFunctions.deleteCard)
 
 
 export default cardRouter;

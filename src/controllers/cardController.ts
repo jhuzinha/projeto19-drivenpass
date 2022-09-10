@@ -7,3 +7,11 @@ export async function createCard(req: Request, res: Response) {
     const user = await validateToken(token)
 
 }
+
+export async function getCard(req: Request, res: Response) {
+
+}
+
+export async function deleteCard(req: Request, res: Response) {
+
+}
