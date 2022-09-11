@@ -14,13 +14,13 @@ export async function create(card: ICardsType, id: number) {
 }
 
 export async function get(id: number, userId: number) {
-    if (isNaN(id)) { throw { type: "Not Found", message: "Not Found" } }
     if (id) {
         const card = await cardFunctions.getById(id)
         if (!card || card.usersId !== userId) {
             throw { type: "Not Found", message: "Not Found" }
         }
         card.password = descryptPassword(card.password)
+        card.codeSecurity = descryptPassword(card.codeSecurity)
         return card
     }
     const cards = await cardFunctions.findMany(userId)

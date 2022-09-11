@@ -11,7 +11,6 @@ export async function create(notes: INotesType, id: number) {
 }
 
 export async function get(id: number, userId: number) {
-    if (isNaN(id)) { throw { type: "Not Found", message: "Not Found" } }
     if (id) {
         const notes = await safeNotesFunctions.getById(id)
         if (!notes || notes.usersId !== userId) {

@@ -13,7 +13,6 @@ export async function create(credential: ICredentialsType, id: number) {
 }
 
 export async function get(id: number, userId: number) {
-    if (isNaN(id)) { throw { type: "Not Found", message: "Not Found" } }
     if (id) {
         const credentials = await credentialFunctions.getById(id)
         if (!credentials || credentials.usersId !== userId) {
