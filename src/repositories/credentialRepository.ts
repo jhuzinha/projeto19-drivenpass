@@ -6,8 +6,8 @@ export async function insert(credential: ICredentialsInsert) {
     return
 }
 
-export async function findOne(title: string) {
-    const credential = await prisma.credentials.findFirst({ where: { title } })
+export async function findOne(title: string, usersId: number) {
+    const credential = await prisma.credentials.findUnique({ where: { credentialsId: { usersId, title } } })
     return credential
 }
 

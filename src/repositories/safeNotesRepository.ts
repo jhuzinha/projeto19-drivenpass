@@ -5,8 +5,8 @@ export async function insert(data: INotesInsert) {
     await prisma.notes.create({ data })
 }
 
-export async function findOne(title: string) {
-    const notes = prisma.notes.findFirst({ where: { title } })
+export async function findOne(title: string, usersId: number) {
+    const notes = prisma.notes.findUnique({ where: { notesId: { title, usersId } } })
     return notes
 }
 

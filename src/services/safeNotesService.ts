@@ -2,7 +2,7 @@ import { INotesType } from "../types/notesType.js";
 import * as safeNotesFunctions from "../repositories/safeNotesRepository.js";
 
 export async function create(notes: INotesType, id: number) {
-    const existNote = await safeNotesFunctions.findOne(notes.title)
+    const existNote = await safeNotesFunctions.findOne(notes.title, id)
     if (existNote) {
         throw { type: "Conflict", message: "Title alredy exists" }
     }

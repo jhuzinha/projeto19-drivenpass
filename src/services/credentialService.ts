@@ -3,7 +3,7 @@ import * as credentialFunctions from '../repositories/credentialRepository.js';
 import { cryptPassword, descryptPassword } from "../utils/cryptPassword.js";
 
 export async function create(credential: ICredentialsType, id: number) {
-    const existCredential = await credentialFunctions.findOne(credential.title)
+    const existCredential = await credentialFunctions.findOne(credential.title, id)
     if (existCredential) {
         throw { type: "Conflict", message: "Title alredy exists" }
     }
