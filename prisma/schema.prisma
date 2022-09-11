@@ -58,7 +58,7 @@ model Cards {
   title          String  @unique
   number         Int
   nameCard       String
-  codeSecurity   Int
+  codeSecurity   String
   expirationDate String
   password       String
   isVirtual      Boolean
