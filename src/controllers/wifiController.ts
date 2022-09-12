@@ -13,10 +13,11 @@ export async function createWifi(req: Request, res: Response) {
 }
 
 export async function getWifi(req: Request, res: Response) {
-    const id = Number(req.query.id);
+    const { id } = req.query;
+    const params = id ? Number(id) : null
     const token = tokenWithoutBarear(req.headers);
     const user = await validateToken(token);
-    const cards = await wifiFunctions.get(id, user.id)
+    const cards = await wifiFunctions.get(params, user.id)
     return res.status(200).send(cards)
 }
 

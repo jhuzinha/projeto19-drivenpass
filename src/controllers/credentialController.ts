@@ -15,7 +15,7 @@ export async function createCredential(req: Request, res: Response) {
 
 export async function getCredential(req: Request, res: Response) {
     const { id } = req.query;
-    const params = id ? Number(id) : undefined
+    const params = id ? Number(id) : null
     const token = tokenWithoutBarear(req.headers);
     const user = await validateToken(token);
     const credentials = await credentialFunctions.get(params, user.id)

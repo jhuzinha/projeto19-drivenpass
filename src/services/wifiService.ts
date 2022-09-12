@@ -10,7 +10,8 @@ export async function create(wifi: IWifiType, usersId: number) {
 }
 
 
-export async function get(id: number, userId: number) {
+export async function get(id: number | null, userId: number) {
+    if (isNaN(id!)) { throw { type: "Not Found", message: "Not Found" } }
     if (id) {
         const wifi = await wifiFunctions.getById(id)
         if (!wifi || wifi.usersId !== userId) {

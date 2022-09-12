@@ -13,10 +13,11 @@ export async function createNotes(req: Request, res: Response) {
 }
 
 export async function getNotes(req: Request, res: Response) {
-    const id = Number(req.query.id);
+    const { id } = req.query;
+    const params = id ? Number(id) : null
     const token = tokenWithoutBarear(req.headers);
     const user = await validateToken(token);
-    const notes = await safeNotesFunctions.get(id, user.id)
+    const notes = await safeNotesFunctions.get(params, user.id)
     return res.status(200).send(notes)
 }
 

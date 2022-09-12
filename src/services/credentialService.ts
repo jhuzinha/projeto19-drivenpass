@@ -12,8 +12,8 @@ export async function create(credential: ICredentialsType, id: number) {
     return
 }
 
-export async function get(id: number | undefined, userId: number) {
-    console.log(id)
+export async function get(id: number | null, userId: number) {
+    if (isNaN(id!)) { throw { type: "Not Found", message: "Not Found" } }
     if (id) {
         const credentials = await credentialFunctions.getById(id)
         if (!credentials || credentials.usersId !== userId) {

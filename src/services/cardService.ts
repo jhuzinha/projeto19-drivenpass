@@ -13,7 +13,8 @@ export async function create(card: ICardsType, id: number) {
     return
 }
 
-export async function get(id: number, userId: number) {
+export async function get(id: number | null, userId: number) {
+    if (isNaN(id!)) { throw { type: "Not Found", message: "Not Found" } }
     if (id) {
         const card = await cardFunctions.getById(id)
         if (!card || card.usersId !== userId) {
