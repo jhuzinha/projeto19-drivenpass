@@ -7,19 +7,19 @@ interface Error {
 }
 
 function errorTypes(error: Error) {
-    if (error.name == 'TokenExpiredError' || error.name === 'JsonWebTokenError') {
+    if (error.name === 'TokenExpiredError' || error.name === 'JsonWebTokenError') {
         return { status: 401, message: "Token Invalid" }
     }
-    if (error.type == "Not Found") {
+    if (error.type === "Not Found") {
         return { status: 404, message: error.message }
     }
-    if (error.type == "Conflict") {
+    if (error.type === "Conflict") {
         return { status: 409, message: error.message }
     }
-    if (error.type == "Bad Request") {
+    if (error.type === "Bad Request") {
         return { status: 400, message: error.message }
     }
-    if (error.type == "Unauthorized") {
+    if (error.type === "Unauthorized") {
         return { status: 401, message: error.message }
     }
     return { status: 500, message: "Internal server error" }
