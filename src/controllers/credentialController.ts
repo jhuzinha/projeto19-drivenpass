@@ -14,10 +14,11 @@ export async function createCredential(req: Request, res: Response) {
 }
 
 export async function getCredential(req: Request, res: Response) {
-    const id = Number(req.query.id);
+    const { id } = req.query;
+    const params = id ? Number(id) : undefined
     const token = tokenWithoutBarear(req.headers);
     const user = await validateToken(token);
-    const credentials = await credentialFunctions.get(id, user.id)
+    const credentials = await credentialFunctions.get(params, user.id)
     return res.status(200).send(credentials)
 }
 

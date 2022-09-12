@@ -12,8 +12,7 @@ export async function create(credential: ICredentialsType, id: number) {
     return
 }
 
-export async function get(id: number, userId: number) {
-
+export async function get(id: number | undefined, userId: number) {
     if (id) {
         const credentials = await credentialFunctions.getById(id)
         if (!credentials || credentials.usersId !== userId) {
@@ -22,7 +21,6 @@ export async function get(id: number, userId: number) {
         credentials.password = descryptPassword(credentials.password)
         return credentials
     }
-    if (isNaN(id)) { throw { type: "Not Found", message: "Not Found" } }
     const credentials = await credentialFunctions.findMany(userId)
     const descrypCredential = credentials.map((item: ICredentialMap) => { return { "title": item.title, "id": item.id, "url": item.url } })
     return descrypCredential
