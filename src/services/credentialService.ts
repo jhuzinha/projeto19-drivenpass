@@ -13,6 +13,7 @@ export async function create(credential: ICredentialsType, id: number) {
 }
 
 export async function get(id: number | undefined, userId: number) {
+    console.log(id)
     if (id) {
         const credentials = await credentialFunctions.getById(id)
         if (!credentials || credentials.usersId !== userId) {
