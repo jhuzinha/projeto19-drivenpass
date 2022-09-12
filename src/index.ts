@@ -7,7 +7,7 @@ import router from './routers/index.js';
 
 dotenv.config();
 
-const PORT = process.env.PORT;
+const PORT = Number(process.env.PORT)!;
 
 const app = express();
 
@@ -16,6 +16,4 @@ app.use(express.json())
 app.use(router)
 app.use(errorHandler)
 
-app.listen(PORT, () => {
-    console.log(`Estou rodando na porta = ${PORT}`)
-})
+app.listen(PORT)
